@@ -1,6 +1,6 @@
 # isSecuredSite
 
-isSecuredSite was a small application I developed as per the request of the network team who would want to verify if a particular URL is Secured or not.
+isSecuredSite is a small application I developed as per the request of the network team of our university who wanted to verify if a particular URL is Secured or not, provided a list of urls as part of an Excel or CSV.
 
 Input: CSV File<br/>
 Output: Count of secured URLs and the list of URLs with an option to download in EXCEL or PDF format.

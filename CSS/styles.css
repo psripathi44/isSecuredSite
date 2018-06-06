@@ -35,6 +35,12 @@ a{
 	width: 50%;
 }
 
+#intRes{
+	width: 700px; 
+	height: 300px; 
+	overflow-y: scroll;
+}
+
 .formButton {
 	font-family: 'Tajawal', sans-serif;
 	background-color: #434242;
@@ -54,4 +60,63 @@ a{
     background-color: white;
     color: #434242;
 	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.error{
+	color: red;
+	display: inline;
+}
+
+@media only screen and (max-width: 500px) {
+    body {
+		min-width: 500px;
+		font-family: 'Tajawal', sans-serif;
+		font-size:0.5em;
+		font-style: normal;
+		font-weight: 400;
+		color: #4B4B4B;
+    }
+	
+	header {
+		background: #414042;
+		border-bottom: 7px solid #63ce4f;
+		display: inline-block;
+		width: 100%;
+	}
+	
+	#main {
+		width: 80%;
+		padding: 0 10px;
+		display: inline-block;
+		box-sizing: border-box;
+		margin-left: 10%;
+	}
+	
+	#results{
+		border: 1px solid #ccc;
+		padding: 6px 10px;
+		width: 80%;
+	}
+	
+	.formButton {
+		font-family: 'Tajawal', sans-serif;
+		background-color: #434242;
+		color: white;
+		border: 1px solid #555555;
+		font-size: 0.9em;
+		text-decoration: none;
+		display: inline-block;
+		padding: 4px 8px;
+		text-align: center;
+		-webkit-transition-duration: 0.4s;
+		transition-duration: 0.5s;
+		cursor: pointer;
+	}
+
+	.formButton:hover {
+		background-color: white;
+		color: #434242;
+		box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24),0 9px 25px 0 rgba(0,0,0,0.19);
+	}
+
 }

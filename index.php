@@ -15,12 +15,12 @@
 	<form action="" method="post" enctype="multipart/form-data"> 
 		<div>
 			<label id="upload">Select file to upload: </label>
-			<input type="file" name="upload"/>
+			<input type="file" name="upload" id="upload"/>
 		</div> 
 		<div> 
 			<br/>
 			<input class= "formButton" type="hidden" name="action" value="upload"/> 
-			<input type="submit" name="submit" class= "formButton" value="Submit" onclick="clearBox()"/> 
+			<input type="submit" name="submit" class= "formButton" value="Submit"/>
 		</div> 
 	</form>
 	<br/>
@@ -28,11 +28,16 @@
 		<b>Results - </b><br/>
 		<?PHP
 			if(isset($_POST["submit"])){
-				$fileExt = explode(".", $_FILES['upload']['name']);
-				$vFileExt = ['csv'];
+				$temp = $_FILES['upload']['name'];
 				
-				if(!in_array($fileExt[1],$vFileExt)){
-					print "The selected file format is not supported.<br/> Please choose to upload only csv files";
+				if($temp == null){
+					echo "Please select a file to proceed.";
+					return;
+				}
+				$fileExt = explode(".", $_FILES['upload']['name']);
+				if($fileExt[1] != "csv"){
+					echo "The selected file format is not supported.<br/> Please choose to upload only csv files";
+					return;
 				} else {					
 					$row = 0;  //To display the row
 					$retCnt = 0;
@@ -61,7 +66,7 @@
 					print "Total Record(s): $row <br/>No. of secured URLs: $retCnt<br/>";
 					
 					if($retCnt != 0){
-						print"<br/><div style='width: 700px; height: 300px; overflow-y: scroll'>";
+						print"<br/><div id='intRes'>";
 						print "<br/> ".$result;
 						print "</div>";
 					}

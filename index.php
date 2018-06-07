@@ -28,8 +28,15 @@
 		<b>Results - </b><br/>
 		<?PHP
 			if(isset($_POST["submit"])){
-				$temp = $_FILES['upload']['name'];
+				require "db.inc";
+	
+				if (!($connection = @ mysqli_connect("localhost", $username, $password)))//Connecting to localhost
+					die("Could not connect to database"); 
 				
+				if (!mysqli_select_db($connection, $databaseName)) //connecting to Database using "db.inc"
+					showerror($connection);
+					
+				$temp = $_FILES['upload']['name'];
 				if($temp == null){
 					echo "Please select a file to proceed.";
 					return;
@@ -46,7 +53,7 @@
 					$mycsvfile = array(); //define the main array.
 					$file = fopen($_FILES['upload']['tmp_name'],"r"); //Reading file
 					if (($fhandle = $file) !== FALSE) { 
-						while (($data = fgetcsv($fhandle, 1000, ",")) !== FALSE) {//While loop until the last record is fetched
+						while (($data = fgetcsv($fhandle, 10000, ",")) !== FALSE) {//While loop until the last record is fetched
 							$mycsvfile[] = $data; //add the row to the main array.
 							
 							
@@ -56,6 +63,16 @@
 							$pos = strpos($temp, $findme);
 							if ($pos !== false) { //If substring exists, print
 								$result .= $mycsvfile[$row][6]."<br> \n";
+								try{
+									$insTemp = "INSERT INTO tempstore(id, url) VALUES ('{$row}', '{$mycsvfile[$row][6]}')";
+									if (!(@mysqli_query ($connection, $insTemp))) {
+										print '<br><b style="color:#B60000">Exception:</b> ';
+										throw new Exception(showerror($connection));
+									}
+								} catch(Exception $e) {
+									print '<br><br><b style="color:#B60000">Exception: test</b> ' .$e->getMessage();
+								}
+								
 								$retCnt +=1;
 							}
 							$row++; //Pointer moved to next row
@@ -63,7 +80,8 @@
 						fclose($fhandle);
 					}	
 					
-					print "Total Record(s): $row <br/>No. of secured URLs: $retCnt<br/>";
+					print "Total Record(s): $row &nbsp;&nbsp;&nbsp;No. of secured URLs: $retCnt";
+					print "<form action='' method='post'><input style='display: inline;' type='submit' name = 'downCSV' value='Download as CSV'/></form>";
 					
 					if($retCnt != 0){
 						print"<br/><div id='intRes'>";
@@ -71,6 +89,31 @@
 						print "</div>";
 					}
 				}
+			}
+			
+			if(isset($_POST["downCSV"])){
+				require "db.inc";
+				if (!($connection = @ mysqli_connect("localhost", $username, $password)))//Connecting to localhost
+					die("Could not connect to database"); 
+				
+				if (!mysqli_select_db($connection, $databaseName)) //connecting to Database using "db.inc"
+					showerror($connection);
+			
+				header('Content-Type: text/csv; charset=utf-8');
+				header('Content-Disposition: attachment; filename=file.csv');
+
+				$fp = fopen('php://output', 'w');
+
+				fputcsv($fp, array('ID', 'Secured URL'));
+				
+				$fetch = "SELECT id, url FROM tempstore";
+				$result = @ mysqli_query($connection,$fetch);
+				while ($row = @ mysqli_fetch_array($result))
+					fputcsv($output, $row);
+				
+				$delTemp = 'truncate table tempstore';
+				@mysqli_query ($connection, $delTemp);
+				fclose($fp);
 			}
 		?>
 	</div>

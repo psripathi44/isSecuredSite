@@ -69,7 +69,7 @@ a{
 
 @media only screen and (max-width: 500px) {
     body {
-		min-width: 500px;
+		min-width: 480px;
 		font-family: 'Tajawal', sans-serif;
 		font-size:0.5em;
 		font-style: normal;

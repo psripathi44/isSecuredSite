@@ -7,6 +7,8 @@ body {
 	font-style: normal;
 	font-weight: 400;
 	color: #4B4B4B;
+	overflow: hidden;
+
 }
 
 header {
@@ -14,6 +16,7 @@ header {
     border-bottom: 7px solid #63ce4f;
     display: inline-block;
 	width: 100%;
+	height: 10%;
 }
 
 a{
@@ -37,11 +40,11 @@ a{
 
 #intRes{
 	width: 700px; 
-	height: 300px; 
+	height: 250px; 
 	overflow-y: scroll;
 }
 
-.formButton {
+.formButton, .formButton1, .formButton2 {
 	font-family: 'Tajawal', sans-serif;
 	background-color: #434242;
     color: white;
@@ -54,6 +57,13 @@ a{
 	-webkit-transition-duration: 0.4s;
     transition-duration: 0.5s;
     cursor: pointer;
+}
+
+.formButton1{
+	float:left; margin-top:16px;
+}
+.formButton2{
+	margin-left: 10px;
 }
 
 .formButton:hover {
@@ -75,6 +85,7 @@ a{
 		font-style: normal;
 		font-weight: 400;
 		color: #4B4B4B;
+		overflow: auto;
     }
 	
 	header {
@@ -82,6 +93,7 @@ a{
 		border-bottom: 7px solid #63ce4f;
 		display: inline-block;
 		width: 100%;
+		height: 10%;
 	}
 	
 	#main {
@@ -92,13 +104,19 @@ a{
 		margin-left: 10%;
 	}
 	
+	#intRes{
+		width: 350px; 
+		height: 125px; 
+		overflow-y: scroll;
+	}
+	
 	#results{
 		border: 1px solid #ccc;
 		padding: 6px 10px;
-		width: 80%;
+		width: 100%;
 	}
 	
-	.formButton {
+	.formButton, .formButton1, .formButton2 {
 		font-family: 'Tajawal', sans-serif;
 		background-color: #434242;
 		color: white;
@@ -111,6 +129,13 @@ a{
 		-webkit-transition-duration: 0.4s;
 		transition-duration: 0.5s;
 		cursor: pointer;
+	}
+	
+	.formButton1{
+		margin-top:8px;
+	}
+	.formButton2{
+		margin-left: 10px;
 	}
 
 	.formButton:hover {
